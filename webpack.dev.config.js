@@ -28,5 +28,32 @@ module.exports = {
     port: 8080,
     // 3.3 Definiendo el host
     host: "0.0.0.0"
-  }
+  },
+  // Agregando un modulo a webpack
+module: {
+  rules: [
+    {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use:[
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  'modules': false,
+                  'useBuiltIns': 'usage',
+                  'targets': '> 0.25%, not dead',
+                  'corejs': 3
+                }
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
 };
