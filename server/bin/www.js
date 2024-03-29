@@ -3,9 +3,9 @@
  * Module dependencies. 
  */ 
 import app from '../app';
-import debugLib from 'debug';
+import debugLib from 'debug'; //('pilaweb:server')
 import http from 'http';
-const debug = debugLib('pilaweb:server');    
+const debug = debugLib('it-server');    
 
 /** 
 * Normalize a port into a number, string, or false. 
