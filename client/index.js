@@ -1,3 +1,6 @@
+//Cargando estilos
+import './styles/styles.css'
+
 console. log("🎉 Client Server Working powered by webpack 🎉");
 
 // Codigo ES6

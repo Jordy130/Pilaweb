@@ -1,3 +1,4 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // Notas importanes
 // El archivo de configuración debe usar ES5
 
@@ -43,7 +44,21 @@ module: {
           }
         }
       ]
+    },
+    //Reglas para archivo css
+    {
+      test: /\.css$/,
+      use:[
+      MiniCssExtractPlugin.loader,
+      "css-loader"
+      ]
     }
   ]
-}
+},
+//Configuracion de Plugins
+plugins:[
+  new MiniCssExtractPlugin({
+    filename: "styles/app.css"
+  })
+  ]
 };
