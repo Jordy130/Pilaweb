@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ESlintPlugin = require("eslint-webpack-plugin");
 // Notas importanes
 // El archivo de configuración debe usar ES5
 
@@ -69,6 +70,7 @@ module: {
 plugins:[
   new MiniCssExtractPlugin({
     filename: "styles/app.css"
-  })
+  }),
+  new ESlintPlugin()
   ]
 };

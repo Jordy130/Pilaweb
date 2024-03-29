@@ -21,12 +21,13 @@ import webpackConfig from '../webpack.dev.config';
 
 var app = express();
 
-const nodeEnviroment = process.env.NODE_ENV || 'production'
-if(nodeEnviroment === 'developement'){
+const nodeEnviroment = process.env.NODE_ENV || 'production';
+
   // Start Webpack dev server
+  if(nodeEnviroment === 'developement'){
   console.log("🛠️  Ejecutando en modo desarrollo");
   // Adding the key "mode" with its value "development"
-  webpackConfig.mode = nodeEnviroment;
+  webpackConfig.mode = 'development';
   // Setting the dev server port to the same value as the express server
   webpackConfig.devServer.port = process.env.PORT;
   // Setting up the HMR (Hot Module Replacement)
@@ -34,6 +35,7 @@ if(nodeEnviroment === 'developement'){
     "webpack-hot-middleware/client?reload=true&timeout=1000",
     webpackConfig.entry
   ];
+
   // Agregar el plugin a la configuración de desarrollo
   // de webpack
   webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
@@ -42,9 +44,9 @@ if(nodeEnviroment === 'developement'){
   // Enabling the webpack middleware
   app.use( WebpackDevMiddleware(bundle, {
     publicPath: webpackConfig.output.publicPath
-  }) );
+  }));
   //  Enabling the webpack HMR
-  app.use( WebpackHotMiddleware(bundle));
+  app.use(WebpackHotMiddleware(bundle));
 }else{
   console.log("🏭 Ejecutando en modo producción 🏭");
 }
