@@ -1,12 +1,13 @@
 body{
-    padding: 50px;
-    font-size: 14px;
-    font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-    }
-    a{
-      color: #00B7FF;
-    }
+  padding: 50px;
+  font-size: 14px;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+}
 
-    h1{
-      color: teal;  
-    }
+a{
+  color: #00B7FF;
+}
+
+h1{
+  color: teal;
+}

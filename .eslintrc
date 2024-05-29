@@ -1,10 +1,17 @@
 {
   "parser": "@babel/eslint-parser",
-  "extends":["eslint:recommended"],
-  "rules":{},
+  "extends":["airbnb-base", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "no-console": "off",
+    "prettier/prettier": ["error"]
+  },
   "env": {
     "es6": true,
     "node": true,
     "browser": true
+  },
+  "settings": {
+    "import/resolver" : { "babel-module" : {}}
   }
 }

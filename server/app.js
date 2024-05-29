@@ -1,3 +1,4 @@
+// Preámbulo 
 // Ayuda a manejar errores http 
 import createError from "http-errors"; 
 // Ayuda a crear servidores web 
@@ -7,48 +8,48 @@ import path from "path";
 // Ayuda al manejo de cookies 
 import cookieParser from "cookie-parser"; 
 // Maneja el log de peticiones http 
-import logger from "morgan"; 
+import logger from "morgan";
 
-import indexRouter from'./routes/index';
-import usersRouter from'./routes/users';
+import indexRouter from './routes/index';
+import usersRouter from './routes/users';
 
-//Importando las dependencias de webpack
+// Importando las dependencias de webpack
 import webpack from 'webpack';
 import WebpackDevMiddleware from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
-// Importing webpack configuration
+// Importando la configuración de webpack
 import webpackConfig from '../webpack.dev.config';
 
 var app = express();
 
-const nodeEnviroment = process.env.NODE_ENV || 'production';
+// Obteniendo el modo de ejecucion de la app
+const nodeEviroment = process.env.NODE_ENV || 'production';
 
-  // Start Webpack dev server
-  if(nodeEnviroment === 'developement'){
+// Configurando el entorno de desarrollo
+if(nodeEviroment === 'developement'){
   console.log("🛠️  Ejecutando en modo desarrollo");
-  // Adding the key "mode" with its value "development"
+  // Agregando el modo de ejecucion a la configuracion
   webpackConfig.mode = 'development';
-  // Setting the dev server port to the same value as the express server
+  // Estableciendo el valor del puerto del servidor de desarrollo
   webpackConfig.devServer.port = process.env.PORT;
-  // Setting up the HMR (Hot Module Replacement)
+  // Configurando el HMR (Hot Module Replacement)
   webpackConfig.entry = [
-    "webpack-hot-middleware/client?reload=true&timeout=1000",
+    'webpack-hot-middleware/client?reload=true&timeout=1000',
     webpackConfig.entry
   ];
-
   // Agregar el plugin a la configuración de desarrollo
   // de webpack
   webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-  // Creating the bundler
+  // Generando el empaqueta (bundle) de webpack
   const bundle = webpack(webpackConfig);
-  // Enabling the webpack middleware
-  app.use( WebpackDevMiddleware(bundle, {
+  // Agregando el middleware de webpack
+  app.use(WebpackDevMiddleware(bundle, {
     publicPath: webpackConfig.output.publicPath
   }));
-  //  Enabling the webpack HMR
+  // Agregando el middleware de HMR
   app.use(WebpackHotMiddleware(bundle));
 }else{
-  console.log("🏭 Ejecutando en modo producción 🏭");
+  console.log("🚀 Ejecutando en modo producción");
 }
 
 // view engine setup
@@ -59,7 +60,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-//Servidor de archivos estaticos
+// Servidor de archivos estaticos
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use('/', indexRouter);
@@ -81,6 +82,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// Exportando instancia de app 
-// usando js moderno 
 export default app;
