@@ -22,6 +22,9 @@ import webpackConfig from '../webpack.dev.config';
 // Impornting winston logger
 import log from './config/winston';
 
+// Importing template-engine
+import configTemplateEngine from './config/templateEngine';
+
 const app = express();
 
 // Obteniendo el modo de ejecucion de la app
@@ -57,8 +60,7 @@ if (nodeEviroment === 'developement') {
 }
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+configTemplateEngine(app);
 
 app.use(morgan('dev', { stream: log.stream }));
 app.use(express.json());
