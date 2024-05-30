@@ -32,5 +32,8 @@ router.post(
   projectController.addPost,
 );
 
+// GET /project/edit/:id
+router.get('/edit/:id', projectController.edit);
+
 // Exportando el enrutador
 export default router;

@@ -67,8 +67,17 @@ const addPost = async (req, res) => {
   }
 };
 
+// GET "/project/edit/:id"
+const edit = (req, res) => {
+  // Extraer los parametros de la URL
+  const { id } = req.params;
+  // Se renderiza la vista de edicion
+  res.render('project/editView', { id });
+};
+
 export default {
   showDashboard,
   addForm,
   addPost,
+  edit,
 };
