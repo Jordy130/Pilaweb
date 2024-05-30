@@ -91,9 +91,37 @@ const edit = async (req, res) => {
 };
 
 // PUT "/project/edit/:id"
-const editPut = (req, res) => {
+const editPut = async (req, res) => {
   const { id } = req.params;
-  res.status(200).send(`Request Attended Correctly: ${id}`);
+  // Rescatando la informacion del formulario
+  const { errorData: validationError } = req;
+  // Si hay errores de validacion
+  if (validationError) {
+    log.info(`Error al validar Project con id: ${id}`);
+    // Extrayendo los datos de validacion
+    const { value: project } = validationError;
+    // Extrayendo los campos que fallaron en la validacion
+    const errorModel = validationError.inner.reduce((prev, curr) => {
+      const workingPrev = prev;
+      workingPrev[`${curr.path}`] = curr.message;
+      return workingPrev;
+    }, {});
+    return res.status(422).render('project/editView', { project, errorModel });
+  }
+  // Si no hay errores de validacion
+  const project = await ProjectModel.findOne({ _id: id });
+  const { validData: newProject } = req;
+  project.name = newProject.name;
+  project.description = newProject.description;
+  try {
+    // Salvando los cambios del proyecto
+    log.info(`Guardando cambios del proyecto con id: ${id}`);
+    await project.save();
+    return res.redirect(`/project/edit/${id}`);
+  } catch (error) {
+    log.error(`Error al guardar los cambios del proyecto con id: ${id}`);
+    return res.status(500).json(error);
+  }
 };
 
 export default {

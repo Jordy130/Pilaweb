@@ -36,7 +36,15 @@ router.post(
 router.get('/edit/:id', projectController.edit);
 
 // PUT /project/edit/:id
-router.put('/edit/:id', projectController.editPut);
+router.put(
+  '/edit/:id',
+  // Validando los datos de la peticion
+  ValidateFactory({
+    schema: projectValidator.projectSchema,
+    getObject: projectValidator.getProject,
+  }),
+  projectController.editPut,
+);
 
 // Exportando el enrutador
 export default router;
