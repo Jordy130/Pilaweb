@@ -68,11 +68,26 @@ const addPost = async (req, res) => {
 };
 
 // GET "/project/edit/:id"
-const edit = (req, res) => {
+const edit = async (req, res) => {
   // Extraer los parametros de la URL
   const { id } = req.params;
-  // Se renderiza la vista de edicion
-  res.render('project/editView', { id });
+  // Consultar el proyecto por su id
+  try {
+    log.info(`Consultando proyecto con id: ${id}`);
+    const project = await ProjectModel.findOne({ _id: id }).lean().exec();
+    if (project === null) {
+      log.info(`Proyecto con id: ${id} no encontrado`);
+      return res
+        .status(404)
+        .json({ fail: `Proyecto no encontrado con el id ${id}` });
+    }
+    // Se manda a renderizar la vista de edicion
+    log.info(`Proyecto con id: ${id} encontrado`);
+    return res.status(200).json(project);
+  } catch (error) {
+    log.error('Error al consultar el proyecto por su id en la base de datos');
+    return res.status(500).json(error);
+  }
 };
 
 export default {
