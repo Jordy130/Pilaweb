@@ -10,6 +10,9 @@ import http from 'http';
 import app from '../app';
 // Importando llaves de configuración
 import configKeys from '../config/configKeys';
+// Importando la función de conexión a la base de datos
+import connectWithRetry from '../database/mongooseConnection';
+import { log } from 'console';
 
 const debug = debugLib('it-server');
 
@@ -81,6 +84,9 @@ function onListening() {
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
   debug(`Listening on ${bind}`);
 }
+
+// Conexión a la base de datos
+connectWithRetry(configKeys.MONGO_URL);
 
 /**
  * Listen on provided port, on all network interfaces.

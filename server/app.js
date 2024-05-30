@@ -14,6 +14,7 @@ import WebpackDevMiddleware from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
 
 // Importando las rutas
+import mongoose from 'mongoose';
 import router from './router';
 
 // Importando la configuración de webpack
@@ -68,6 +69,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // Servidor de archivos estaticos
 app.use(express.static(path.join(__dirname, '..', 'public')));
+
+// Checking database connection middleware
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    log.info('✅ Pass database 🛢 connection checking');
+    next();
+  } else {
+    log.error('🔥 Failed: database 🛢 connection checking');
+    res.status(503).json({ message: 'Service Unavailable' });
+  }
+});
 
 // Agregando las rutas
 router.addRoutes(app);
