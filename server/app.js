@@ -32,7 +32,7 @@ const app = express();
 const nodeEviroment = process.env.NODE_ENV || 'production';
 
 // Configurando el entorno de desarrollo
-if (nodeEviroment === 'developement') {
+if (nodeEviroment === 'development') {
   console.log('🛠️  Ejecutando en modo desarrollo');
   // Agregando el modo de ejecucion a la configuracion
   webpackConfig.mode = 'development';
