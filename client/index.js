@@ -1,5 +1,6 @@
 // Cargando estilos
 import './styles/style.css';
+import './styles/navbar.css';
 // Importando estilos de Materialize CSS
 import 'materialize-css/dist/css/materialize.css';
 // Importando scripts de Materialize
