@@ -6,8 +6,20 @@ import ProjectModel from './project.model';
 // Actions methods
 
 // GET "/project"
-const showDashboard = (req, res) => {
-  res.send('⚠️ UNDER CONSTRUCTION: GET /project ⚠️');
+// GET "/project/dashboard"
+const showDashboard = async (req, res) => {
+  try {
+    // Consultando todos los proyectos
+    const projects = await ProjectModel.find({}).lean().exec();
+    // Respondiendo con la lista de proyectos al cliente
+    log.info('Proyectos consultados correctamente');
+    return res.render('project/dashboardView', { projects });
+  } catch (error) {
+    log.error(
+      'LN16 server/domains/project/project.controller.js Error al consultar todos los proyectos',
+    );
+    return res.status(500).json(error);
+  }
 };
 
 // GET "/project/add"
@@ -43,8 +55,10 @@ const addPost = async (req, res) => {
     // Se crea la instancia de un documento de tipo Project
     const savedProject = await ProjectModel.create(project);
     // Se guarda el documento en la base de datos
-    log.info('Proyecto guardado en la base de datos');
-    return res.status(201).json(savedProject);
+    log.info(`Proyecto guardado en la base de datos: ${savedProject}`);
+    // Se redirige al cliente a la vista de dashboard
+    log.info('Redirigiendo al cliente a la vista de dashboard');
+    return res.redirect('/project/dashboard');
   } catch (error) {
     log.error(
       'LN49 server/domains/project/project.controller.js Error al guardar el proyecto en la base de datos',

@@ -1,0 +1,24 @@
+<h1>Listado de Proyectos</h1>
+<ul>
+    {{#each projects}}
+    <div class="col s12 m7">
+    <h2 class="header" style="font-size: xx-large; color: #555">{{name}}</h2>
+    <div class="card horizontal teal darken-4" style="padding: 2rem;">
+      <div class="card-image">
+        <img height="100rem" src="/images/project_avatar.png">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content teal-text text-lighten-5">
+          <p>{{description}}</p>
+        </div>
+        <div class="card-action">
+          <a href="#">EDITAR</a>
+          <a href="#">BORRAR</a>
+        </div>
+      </div>
+    </div>
+  </div>
+    {{else}}
+    <p>No hay proyectos que listar 😔</p>
+    {{/each}}
+</ul>

@@ -15,7 +15,8 @@ const router = new Router();
 // Definiendo las rutas
 
 // GET /project
-router.get('/', projectController.showDashboard);
+// GET /project/dashboard
+router.get(['/', '/dashboard'], projectController.showDashboard);
 
 // GET /project/add
 // GET /project/add-form
