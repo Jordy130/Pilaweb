@@ -22,6 +22,9 @@ import router from './router';
 // Importando la configuración de webpack
 import webpackConfig from '../webpack.dev.config';
 
+// Importando la configuracion de las sesiones
+import configSessions from './config/configSessions';
+
 // Impornting winston logger
 import log from './config/winston';
 
@@ -71,6 +74,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // Enable PUT and DELETE methods
 app.use(methodOverride('_method'));
+// Configurando el manejo de sesiones y mensajes flash
+configSessions(app);
 // Servidor de archivos estaticos
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
