@@ -4,6 +4,11 @@ import { Router } from 'express';
 // Importando el controlador
 import projectController from './project.controller';
 
+// Importando el factory de validacion
+import ValidateFactory from '../../services/validateFactory';
+// Importando el esquema de validacion
+import projectValidator from './project.validator';
+
 // Creando una isntancia del enrutador
 const router = new Router();
 
@@ -17,7 +22,14 @@ router.get('/', projectController.showDashboard);
 router.get('/add', projectController.addForm);
 
 // POST /project/add
-router.post('/add', projectController.addPost);
+router.post(
+  '/add',
+  ValidateFactory({
+    schema: projectValidator.projectSchema,
+    getObject: projectValidator.getProject,
+  }),
+  projectController.addPost,
+);
 
 // Exportando el enrutador
 export default router;
