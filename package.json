@@ -1,5 +1,5 @@
 {
-  "name": "dwpcii-2023b",
+  "name": "pilaweb",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -14,7 +14,9 @@
     "build": "npm run b:c && npm run b:s",
     "lint:c": "eslint ./client/**/*.js",
     "lint:s": "eslint ./server/**/*.js",
-    "clean:logs": "rm -rf ./server/logs/*.log"
+    "clean:logs": "rm -rf ./server/logs/*.log",
+    "dotenv:pull": "npx dotenv-vault@latest pull",
+    "dotenv:push": "npx dotenv-vault@latest push"
   },
   "dependencies": {
     "@babel/cli": "^7.23.4",
@@ -26,6 +28,7 @@
     "cookie-parser": "~1.4.4",
     "core-js": "^3.34.0",
     "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
     "express": "~4.16.1",
     "express-handlebars": "^7.1.2",
     "hbs": "~4.0.4",
