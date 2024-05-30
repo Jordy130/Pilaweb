@@ -16,5 +16,8 @@ router.get('/', projectController.showDashboard);
 // GET /project/add-form
 router.get('/add', projectController.addForm);
 
+// POST /project/add
+router.post('/add', projectController.addPost);
+
 // Exportando el enrutador
 export default router;
