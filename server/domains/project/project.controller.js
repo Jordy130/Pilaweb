@@ -1,4 +1,8 @@
+// Imporntando winston logger
 import log from '../../config/winston';
+// Importando el modelo de Project
+import ProjectModel from './project.model';
+
 // Actions methods
 
 // GET "/project"
@@ -13,7 +17,7 @@ const addForm = (req, res) => {
 };
 
 // POST "/project/add"
-const addPost = (req, res) => {
+const addPost = async (req, res) => {
   // Rescatando la info del formulario
   const { errorData: validationError } = req;
   // Si hay errores de validacion
@@ -34,9 +38,19 @@ const addPost = (req, res) => {
   }
   // Si no hay error de validacion
   const { validData: project } = req;
-  // Contestamos información al cliente de que se ha cargado el proyecto
-  log.info('Se entrega al cliente la info del proyecto cargado');
-  return res.status(200).json(project);
+  // Se guarda el documento en la base de datos
+  try {
+    // Se crea la instancia de un documento de tipo Project
+    const savedProject = await ProjectModel.create(project);
+    // Se guarda el documento en la base de datos
+    log.info('Proyecto guardado en la base de datos');
+    return res.status(201).json(savedProject);
+  } catch (error) {
+    log.error(
+      'LN49 server/domains/project/project.controller.js Error al guardar el proyecto en la base de datos',
+    );
+    return res.status(500).json(error);
+  }
 };
 
 export default {
