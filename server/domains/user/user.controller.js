@@ -1,8 +1,13 @@
+// Importando la funcionalidad de log
+import log from '../../config/winston';
 // Action Methods
 
 // GET /user/login
 const login = (req, res) => {
-  res.send('⚠️ UNDER CONSTRUCTION: GET /user/login ⚠️');
+  // Loggear la solicitud
+  log.info('Se entrega formulario de login');
+  // Servir la vista de login
+  res.render('user/login');
 };
 
 // GET "/user/logout"
