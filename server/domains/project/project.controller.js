@@ -83,11 +83,17 @@ const edit = async (req, res) => {
     }
     // Se manda a renderizar la vista de edicion
     log.info(`Proyecto con id: ${id} encontrado`);
-    return res.status(200).json(project);
+    return res.render('project/editView', { project });
   } catch (error) {
     log.error('Error al consultar el proyecto por su id en la base de datos');
     return res.status(500).json(error);
   }
+};
+
+// PUT "/project/edit/:id"
+const editPut = (req, res) => {
+  const { id } = req.params;
+  res.status(200).send(`Request Attended Correctly: ${id}`);
 };
 
 export default {
@@ -95,4 +101,5 @@ export default {
   addForm,
   addPost,
   edit,
+  editPut,
 };

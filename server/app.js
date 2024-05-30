@@ -1,6 +1,8 @@
 // Preámbulo
 // Ayuda a crear servidores web
 import express from 'express';
+// Habilita put y delete en los formularios
+import methodOverride from 'method-override';
 // Nucleo de node, ayuda al manejo de las rutas
 import path from 'path';
 // Ayuda al manejo de cookies
@@ -67,6 +69,8 @@ app.use(morgan('dev', { stream: log.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// Enable PUT and DELETE methods
+app.use(methodOverride('_method'));
 // Servidor de archivos estaticos
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
