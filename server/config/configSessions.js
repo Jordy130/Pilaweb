@@ -5,7 +5,7 @@ import ConnectFlash from 'connect-flash';
 // Importando soporte para almacenar sesiones en base de datos
 import MongoStore from 'connect-mongo';
 // Importando la URL de la base de datos
-import configKeys from './configKeys.js';
+import configKeys from './configKeys';
 
 // Configurando el manejo de sesiones
 const options = {
