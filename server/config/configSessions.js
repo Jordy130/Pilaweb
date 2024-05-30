@@ -13,6 +13,7 @@ const options = {
   resave: true,
   saveUninitialized: true,
   store: MongoStore.create({
+    mongoUrl: configKeys.MONGO_URL,
     ttl: 1 * 24 * 60 * 60, // 1 día
   }),
 };

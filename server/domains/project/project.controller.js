@@ -56,6 +56,8 @@ const addPost = async (req, res) => {
     const savedProject = await ProjectModel.create(project);
     // Se guarda el documento en la base de datos
     log.info(`Proyecto guardado en la base de datos: ${savedProject}`);
+    // Generando un mensaje flash
+    req.flash('successMessage', 'Proyecto creado exitosamente');
     // Se redirige al cliente a la vista de dashboard
     log.info('Redirigiendo al cliente a la vista de dashboard');
     return res.redirect('/project/dashboard');
@@ -117,6 +119,8 @@ const editPut = async (req, res) => {
     // Salvando los cambios del proyecto
     log.info(`Guardando cambios del proyecto con id: ${id}`);
     await project.save();
+    // Generando un mensaje flash
+    req.flash('successMessage', 'Proyecto editado exitosamente');
     return res.redirect(`/project/edit/${id}`);
   } catch (error) {
     log.error(`Error al guardar los cambios del proyecto con id: ${id}`);
@@ -131,6 +135,9 @@ const deleteProject = async (req, res) => {
   // Borrar el proyecto por su id
   try {
     const result = await ProjectModel.findByIdAndDelete(id);
+    // Generando un mensaje flash
+    req.flash('successMessage', 'Proyecto borrado exitosamente');
+    // TODO: Redireccionar al dashboard
     return res.status(200).json(result);
   } catch (error) {
     return res.status(500).json(error);
