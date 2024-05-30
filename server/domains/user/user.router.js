@@ -4,6 +4,11 @@ import { Router } from 'express';
 // Importando el controlador de usuario
 import UserController from './user.controller';
 
+// Imporntando el validador del usuario
+import userValidator from './user.validator';
+// Importando el factory de validacion
+import ValidateFactory from '../../services/validateFactory';
+
 // Creando la instancia del enrutador
 const router = new Router();
 
@@ -19,7 +24,11 @@ router.get('/logout', UserController.logout);
 router.get('/register', UserController.register);
 
 // POST /user/register
-router.post('/register', UserController.registerPost);
+router.post(
+  '/register',
+  ValidateFactory(userValidator.signUp),
+  UserController.registerPost,
+);
 
 // Exportando el enrutador
 export default router;
