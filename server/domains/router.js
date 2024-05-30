@@ -1,4 +1,4 @@
-import createError from 'http-errors';
+mport createError from 'http-errors';
 // Impornting winston logger
 import log from './config/winston';
 // Importando el enrutador Home
@@ -42,4 +42,4 @@ const addRoutes = (app) => {
 };
 
 // Exportando la funcion de enrutado
-export default { addRoutes }
+export default { addRoutes };
