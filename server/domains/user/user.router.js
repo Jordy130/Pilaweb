@@ -18,5 +18,8 @@ router.get('/logout', UserController.logout);
 // GET /user/register
 router.get('/register', UserController.register);
 
+// POST /user/register
+router.post('/register', UserController.registerPost);
+
 // Exportando el enrutador
 export default router;
