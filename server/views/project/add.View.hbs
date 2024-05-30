@@ -15,9 +15,15 @@
               type="text" 
               class="validate" 
               name="name" 
+              required
               id="project-name"
               value="{{project.name}}"
               placeholder="El nombre del proyecto aqui 👇">
+            <span 
+              class="helper-text"
+              data-error="Es necesario un nombre para tu proyecto"
+              data-success="✅ Correcto!"
+              ></span>
             {{#if errorModel.name}}
               <span style="color: crimson;">Error: {{errorModel.name}}</span>
             {{/if}}
@@ -29,7 +35,13 @@
             <textarea 
               name="description" 
               id="project-description" 
-              class="materialize-textarea">{{project.description}}</textarea>
+              required
+              class="materialize-textarea validate">{{project.description}}</textarea>
+              <span 
+              class="helper-text"
+              data-error="Es necesaria una descripción para tu proyecto"
+              data-success="✅ Correcto!"
+              ></span>
             {{#if errorModel.description}}
               <span style="color: crimson;">Error: {{errorModel.description}}</span>
             {{/if}}
