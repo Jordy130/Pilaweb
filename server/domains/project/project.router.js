@@ -46,5 +46,8 @@ router.put(
   projectController.editPut,
 );
 
+// DELETE /project/:id
+router.delete('/:id', projectController.deleteProject);
+
 // Exportando el enrutador
 export default router;

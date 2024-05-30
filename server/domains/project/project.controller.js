@@ -124,10 +124,24 @@ const editPut = async (req, res) => {
   }
 };
 
+// DELETE "/project/:id"
+const deleteProject = async (req, res) => {
+  // Extraer el parametro id de la peticion
+  const { id } = req.params;
+  // Borrar el proyecto por su id
+  try {
+    const result = await ProjectModel.findByIdAndDelete(id);
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
 export default {
   showDashboard,
   addForm,
   addPost,
   edit,
   editPut,
+  deleteProject,
 };
