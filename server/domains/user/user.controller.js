@@ -17,7 +17,8 @@ const logout = (req, res) => {
 
 // GET "/user/register"
 const register = (req, res) => {
-  res.send('⚠️ UNDER CONSTRUCTION: GET /user/register ⚠️');
+  log.info('Se entrega formulario de registro');
+  res.render('user/register');
 };
 
 export default { login, logout, register };
